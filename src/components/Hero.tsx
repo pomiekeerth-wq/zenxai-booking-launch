@@ -12,12 +12,13 @@ const Hero = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
+        {/* Logo and Company Name - Top Right */}
+        <div className="flex items-center justify-end gap-3 mb-12 animate-fade-up">
+          <img src={logo} alt="ZENXAI Logo" className="h-16 md:h-20 w-auto" />
+          <span className="text-2xl md:text-3xl font-bold text-primary tracking-wide">ZENXAI</span>
+        </div>
+        
         <div className="max-w-3xl mx-auto text-center">
-          {/* Logo and Company Name */}
-          <div className="flex flex-col items-center mb-8 animate-fade-up">
-            <img src={logo} alt="ZENXAI Logo" className="h-28 md:h-36 w-auto mb-4" />
-            <span className="text-2xl md:text-3xl font-bold text-primary tracking-wide">ZENXAI</span>
-          </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6 animate-fade-up">
             Smart Booking Systems,{" "}
