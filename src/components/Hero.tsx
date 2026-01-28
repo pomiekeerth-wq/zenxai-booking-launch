@@ -3,7 +3,7 @@ import { Calendar, ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen gradient-hero flex items-center pt-16 overflow-hidden">
+    <section className="relative min-h-screen gradient-hero flex items-center overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
