@@ -13,7 +13,7 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Logo and Company Name - Top Right */}
-        <div className="flex items-center justify-end gap-3 mb-12 animate-fade-up">
+        <div className="flex items-center justify-start gap-3 mb-12 animate-fade-up">
           <img src={logo} alt="ZENXAI Logo" className="h-16 md:h-20 w-auto" />
           <span className="text-2xl md:text-3xl font-bold text-primary tracking-wide">ZENXAI</span>
         </div>
