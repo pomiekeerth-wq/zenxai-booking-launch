@@ -1,0 +1,106 @@
+import { useRef, useEffect } from "react";
+import { useTextAnimation } from "@/hooks/useTextAnimation";
+import workflowVideo from "../assets/LMS WORKFLOW.mp4";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
+const Process = () => {
+    const headingRef = useRef(null);
+    const subRef = useRef(null);
+    const videoRef = useRef(null);
+
+    useTextAnimation(headingRef);
+    useTextAnimation(subRef, { type: "words", delay: 0.1 });
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && videoRef.current) {
+                        videoRef.current.play().catch(error => {
+                            console.log("Autoplay prevented:", error);
+                        });
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => {
+            if (videoRef.current) {
+                observer.unobserve(videoRef.current);
+            }
+        };
+    }, []);
+
+    const handleVideoClick = () => {
+        if (videoRef.current) {
+            videoRef.current.currentTime = 0;
+            videoRef.current.play();
+        }
+    };
+
+    return (
+        <section id="process" className="relative py-12 overflow-hidden">
+            {/* Animated Background */}
+            <div className="absolute inset-0 bg-white/20 -z-20"></div>
+            <div className="absolute top-0 -left-4 w-96 h-96 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+            <div className="absolute top-0 -right-4 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-32 left-20 w-96 h-96 bg-sky-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+
+            <div className="container mx-auto px-4">
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                    {/* Text Column */}
+                    <div className="w-full lg:w-1/2 text-center lg:text-left">
+                        <h2
+                            ref={headingRef}
+                            className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight"
+                        >
+                            You can start selling within <span className="text-primary">30 days</span>.
+                        </h2>
+                        <p className="text-muted-foreground text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
+                            Our streamlined process ensures you spend less time setting up and more time earning. Watch how easy it is to get your academy up and running.
+                        </p>
+
+                        <a
+                            href="https://harivikash-b.dayschedule.com/1-on-1-for-booking-system"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block"
+                        >
+                            <Button
+                                size="lg"
+                                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 h-auto text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                            >
+                                Book a Call
+                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                        </a>
+                    </div>
+
+                    {/* Video Column */}
+                    <div className="w-full lg:w-1/2 relative group cursor-pointer" onClick={handleVideoClick}>
+                        <div className="relative rounded-3xl overflow-hidden shadow-[0_35px_60px_-15px_rgba(0,0,0,0.6)] bg-black max-w-lg mx-auto border-2 border-primary">
+                            <video
+                                ref={videoRef}
+                                src={workflowVideo}
+                                className="w-full h-[550px] object-cover"
+                                playsInline
+                                muted
+                            // No loop attribute as requested
+                            />
+                        </div>
+                        {/* Decorative elements behind video */}
+                        <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-[2.5rem] -z-10 blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Process;

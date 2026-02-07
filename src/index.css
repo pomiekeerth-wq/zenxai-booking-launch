@@ -44,7 +44,7 @@ All colors MUST be HSL.
     /* Custom tokens */
     --gradient-primary: linear-gradient(135deg, hsl(185 65% 35%) 0%, hsl(190 70% 28%) 100%);
     --gradient-accent: linear-gradient(135deg, hsl(38 90% 50%) 0%, hsl(28 85% 55%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(200 30% 98%) 0%, hsl(185 30% 95%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(185 65% 94%) 0%, hsl(190 60% 85%) 100%);
     --shadow-soft: 0 4px 20px -4px hsl(200 50% 10% / 0.1);
     --shadow-card: 0 8px 30px -8px hsl(200 50% 10% / 0.12);
     --shadow-accent: 0 8px 25px -5px hsl(38 90% 50% / 0.35);
@@ -55,23 +55,23 @@ All colors MUST be HSL.
   .gradient-primary {
     background: var(--gradient-primary);
   }
-  
+
   .gradient-accent {
     background: var(--gradient-accent);
   }
-  
+
   .gradient-hero {
     background: var(--gradient-hero);
   }
-  
+
   .shadow-soft {
     box-shadow: var(--shadow-soft);
   }
-  
+
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
-  
+
   .shadow-accent {
     box-shadow: var(--shadow-accent);
   }
@@ -93,12 +93,83 @@ All colors MUST be HSL.
     animation: fadeUp 0.6s ease-out 0.4s forwards;
     opacity: 0;
   }
+
+  .animate-glow {
+    animation: glow 4s ease-in-out infinite;
+  }
+
+  .lightning-border {
+    position: relative;
+    border-radius: 2.1rem;
+    padding: 4px;
+    background: hsla(var(--primary) / 0.3);
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 0 30px hsla(var(--primary) / 0.4);
+    animation: lightning-glow 4s infinite alternate;
+  }
+
+  .lightning-border::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(transparent,
+        hsla(var(--primary) / 1) 4%,
+        #fff 10%,
+        hsla(var(--primary) / 1) 16%,
+        transparent 20%,
+        transparent 50%,
+        hsla(var(--primary) / 1) 54%,
+        #fff 60%,
+        hsla(var(--primary) / 1) 66%,
+        transparent 70%);
+    animation: rotate-lightning 2s linear infinite;
+    transform: translate(-50%, -50%);
+  }
+
+  .lightning-border-inner {
+    position: relative;
+    z-index: 1;
+    background: black;
+    border-radius: 2rem;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+@keyframes rotate-lightning {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes lightning-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 30px hsla(var(--primary) / 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 60px hsla(var(--primary) / 0.7), 0 0 20px #fff;
+  }
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -109,12 +180,103 @@ All colors MUST be HSL.
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsla(var(--primary) / 0.3), 0 0 0 1px hsla(var(--primary) / 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 40px hsla(var(--primary) / 0.6), 0 0 0 2px hsla(var(--primary) / 0.4);
+  }
+}
+
+.text-glitter-white {
+  color: #ffffff;
+  font-weight: 800;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(255, 255, 255, 0.2);
+  animation: glitterShine 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes glitterShine {
+
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(255, 255, 255, 0.6),
+      0 0 30px rgba(255, 255, 255, 0.4),
+      0 0 40px rgba(255, 255, 255, 0.2);
+  }
+
+  50% {
+    text-shadow:
+      0 0 20px rgba(255, 255, 255, 1),
+      0 0 30px rgba(255, 255, 255, 0.8),
+      0 0 40px rgba(255, 255, 255, 0.6),
+      0 0 50px rgba(255, 255, 255, 0.4),
+      0 0 60px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes shimmer {
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Base styles */
 @layer base {
   * {
     @apply border-border;
