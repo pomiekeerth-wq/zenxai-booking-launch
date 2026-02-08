@@ -144,12 +144,6 @@ const Hero = () => {
         }}
       >
 
-        {/* BACKGROUND BLURS (Inside the card) */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl opacity-50" />
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-accent/20 rounded-full blur-3xl opacity-50" />
-        </div>
-
         {/* CONTENT */}
         <div className="relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
