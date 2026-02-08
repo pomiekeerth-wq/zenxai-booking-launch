@@ -97,6 +97,7 @@ const ExclusiveFeatures = () => {
     const sectionRef = useRef(null);
     const headingRef = useRef(null);
     const cardsContainerRef = useRef(null);
+    const footerRef = useRef(null);
     useTextAnimation(headingRef);
 
     useEffect(() => {
@@ -112,7 +113,8 @@ const ExclusiveFeatures = () => {
             });
 
             // Cache footer reference
-            const footer = document.querySelector(".sticky-footer");
+            footerRef.current = document.querySelector(".sticky-footer");
+            const footer = footerRef.current;
 
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -162,7 +164,9 @@ const ExclusiveFeatures = () => {
                                 force3D: true
                             });
                         }
-                    }
+                    },
+                    fastScrollEnd: true,
+                    invalidateOnRefresh: true,
                 }
             });
 

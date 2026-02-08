@@ -22,9 +22,6 @@ const StickyFooter = () => {
             <div className="container mx-auto flex items-center justify-between gap-2 max-w-6xl">
 
                 <div className="flex flex-row items-center gap-3 text-left">
-                    <p className="font-bold text-background text-xs sm:text-sm md:text-lg leading-tight max-w-[120px] sm:max-w-none">
-                        LMS - Learning Management System
-                    </p>
                     <div className="flex items-center gap-2 bg-white/5 px-2 py-0.5 rounded-full border border-white/10 scale-90 sm:scale-100">
                         <span className="text-white/40 line-through text-[10px] sm:text-xs font-medium">₹299</span>
                         <span className="text-primary font-black text-sm sm:text-base md:text-xl">₹99</span>
