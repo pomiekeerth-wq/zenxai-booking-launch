@@ -232,6 +232,56 @@ All colors MUST be HSL.
   }
 }
 
+.text-glitter-black {
+  color: #000000;
+  font-weight: 950;
+  background: linear-gradient(90deg,
+      #000000 0%,
+      #000000 45%,
+      #ffffff 50%,
+      #000000 55%,
+      #000000 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glitterShineBlack 3s linear infinite;
+  display: inline-block;
+}
+
+.highlight-primary {
+  position: relative;
+  display: inline-block;
+  color: #000000;
+  font-weight: 900;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.highlight-primary::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  width: 110%;
+  height: 100%;
+  background-color: hsla(var(--primary) / 0.35);
+  z-index: -1;
+  transform: translateY(-50%) rotate(-1deg);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  filter: blur(0.5px);
+}
+
+@keyframes glitterShineBlack {
+  0% {
+    background-position: -100% 0;
+  }
+
+  100% {
+    background-position: 100% 0;
+  }
+}
+
 @keyframes blob {
   0% {
     transform: translate(0px, 0px) scale(1);
