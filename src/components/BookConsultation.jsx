@@ -46,7 +46,6 @@ const TickingWord = () => {
                     {getCurrentWordData().map((item) => (
                         <motion.span
                             key={item.id}
-                            layout={item.id === "static-o"}
                             variants={{
                                 hidden: { opacity: 0, y: -25 },
                                 visible: { opacity: 1, y: 0 },
@@ -55,8 +54,7 @@ const TickingWord = () => {
                             transition={{
                                 type: "spring",
                                 stiffness: 400,
-                                damping: 30,
-                                layout: { duration: 0.4 }
+                                damping: 30
                             }}
                             className="inline-block"
                         >
@@ -80,9 +78,6 @@ const BookConsultation = () => {
         <section id="contact" className="py-20 bg-background overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="relative gradient-primary rounded-[2rem] p-8 md:p-16 overflow-hidden text-center">
-
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl opacity-50" />
-                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/20 rounded-full blur-2xl opacity-50" />
 
                     <div className="relative z-10 max-w-4xl mx-auto">
                         <div className="w-16 h-16 bg-white/40 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl">

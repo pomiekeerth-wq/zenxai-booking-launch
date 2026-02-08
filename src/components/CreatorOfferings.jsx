@@ -33,18 +33,18 @@ const CreatorOfferings = () => {
                 scaleX: 0,
                 transformOrigin: "left",
                 opacity: 0,
-                duration: 0.5,
-                stagger: 0.05,
-                ease: "power2.out"
+                duration: 0.4,
+                stagger: 0.04,
+                ease: "power4.out"
             })
                 .from(".grid-line-v", {
                     scaleY: 0,
                     transformOrigin: "top",
                     opacity: 0,
-                    duration: 0.5,
-                    stagger: 0.05,
-                    ease: "power2.out"
-                }, "-=0.3");
+                    duration: 0.4,
+                    stagger: 0.04,
+                    ease: "power4.out"
+                }, "-=0.2");
 
             // Instant card reveal with micro-motion
             gsap.fromTo(".offering-card",
@@ -53,27 +53,27 @@ const CreatorOfferings = () => {
                     y: 0,
                     opacity: 1,
                     scale: 1,
-                    duration: 0.6,
-                    stagger: 0.12,
-                    ease: "power3.out",
+                    duration: 0.4,
+                    stagger: 0.1,
+                    ease: "power4.out",
                     force3D: true,
                     scrollTrigger: {
                         trigger: containerRef.current,
-                        start: "top 80%",
+                        start: "top 85%",
                         once: true
                     },
                     onComplete: () => {
                         // Subtle floating polish after reveal
                         const floatingTween = gsap.to(".offering-card", {
-                            y: -6,
-                            duration: 1.8,
+                            y: -4,
+                            duration: 2,
                             ease: "sine.inOut",
                             yoyo: true,
                             repeat: -1,
                             force3D: true,
                             stagger: {
-                                each: 0.2,
-                                from: "random"
+                                each: 0.3,
+                                from: "start"
                             }
                         });
 

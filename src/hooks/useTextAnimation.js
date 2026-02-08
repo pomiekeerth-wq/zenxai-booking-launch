@@ -29,6 +29,13 @@ export const useTextAnimation = (ref, options = {}) => {
         const initAnimation = () => {
             if (!isMounted || !ref.current) return;
 
+            // PERFORMANCE GUARD: Disable animations if user prefers reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) {
+                gsap.set(ref.current, { opacity: 1, y: 0 });
+                return;
+            }
+
             // Split text
             split = new SplitType(ref.current, {
                 types: "lines,words,chars",

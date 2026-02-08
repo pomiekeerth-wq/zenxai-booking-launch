@@ -58,40 +58,40 @@ const Hero = () => {
 
         // Animate heading chars
         tl.from(headingSplit.chars, {
-          y: 60,
+          y: 40,
           opacity: 0,
-          duration: 0.5, // Faster
-          stagger: 0.015, // Faster
-          ease: "power3.out",
+          duration: 0.4,
+          stagger: 0.01,
+          ease: "power4.out",
           force3D: true
         });
 
-        // Animate Video Container (Start simultaneously with heading)
+        // Animate Video Container
         tl.from(videoRef.current, {
-          scale: 0.95,
-          y: 40,
+          scale: 0.98,
+          y: 30,
           opacity: 0,
-          duration: 0.8, // Faster
-          ease: "power3.out",
+          duration: 0.6,
+          ease: "power4.out",
           force3D: true
         }, 0);
 
         // Animate subheadline words
         tl.from(subheadlineSplit.words, {
-          y: 40,
+          y: 20,
           opacity: 0,
-          duration: 0.5, // Faster
-          stagger: 0.01,
-          ease: "power3.out",
+          duration: 0.4,
+          stagger: 0.008,
+          ease: "power4.out",
           force3D: true
-        }, "-=0.6");
+        }, "-=0.5");
 
         // Animate CTA buttons
         tl.from(ctaRef.current, {
-          y: 20,
+          y: 15,
           opacity: 0,
-          duration: 0.6, // Faster
-          ease: "power3.out",
+          duration: 0.4,
+          ease: "power4.out",
           force3D: true
         }, "-=0.3");
       });
