@@ -85,7 +85,7 @@ const BookConsultation = () => {
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/20 rounded-full blur-2xl opacity-50" />
 
                     <div className="relative z-10 max-w-4xl mx-auto">
-                        <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl">
+                        <div className="w-16 h-16 bg-white/40 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl">
                             <Calendar className="w-8 h-8 text-white" />
                         </div>
 

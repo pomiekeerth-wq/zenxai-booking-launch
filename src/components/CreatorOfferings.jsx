@@ -20,10 +20,7 @@ const CreatorOfferings = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Initial state for cards
-            gsap.set(".offering-card", { opacity: 0, y: 30 });
-
-            // Grid animation - Sequential Drawing Effect
+            // Grid animation - Faster sequential drawing
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
@@ -36,32 +33,63 @@ const CreatorOfferings = () => {
                 scaleX: 0,
                 transformOrigin: "left",
                 opacity: 0,
-                duration: 1.2,
-                stagger: 0.15,
-                ease: "none" // Linear drawing for "real-time" feel
+                duration: 0.5,
+                stagger: 0.05,
+                ease: "power2.out"
             })
                 .from(".grid-line-v", {
                     scaleY: 0,
                     transformOrigin: "top",
                     opacity: 0,
-                    duration: 1.2,
-                    stagger: 0.15,
-                    ease: "none"
-                }, "-=0.5"); // Start vertical lines earlier but keep them sequential
+                    duration: 0.5,
+                    stagger: 0.05,
+                    ease: "power2.out"
+                }, "-=0.3");
 
-            // Batch animation for cards
-            ScrollTrigger.batch(".offering-card", {
-                start: "top 85%",
-                onEnter: batch => gsap.to(batch, {
-                    opacity: 1,
+            // Instant card reveal with micro-motion
+            gsap.fromTo(".offering-card",
+                { y: 40, opacity: 0, scale: 0.96 },
+                {
                     y: 0,
-                    stagger: 0.15,
-                    duration: 0.8,
-                    ease: "power2.out",
-                    overwrite: true
-                }),
-                onLeaveBack: batch => gsap.set(batch, { opacity: 0, y: 30, overwrite: true })
-            });
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    stagger: 0.12,
+                    ease: "power3.out",
+                    force3D: true,
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 80%",
+                        once: true
+                    },
+                    onComplete: () => {
+                        // Subtle floating polish after reveal
+                        const floatingTween = gsap.to(".offering-card", {
+                            y: -6,
+                            duration: 1.8,
+                            ease: "sine.inOut",
+                            yoyo: true,
+                            repeat: -1,
+                            force3D: true,
+                            stagger: {
+                                each: 0.2,
+                                from: "random"
+                            }
+                        });
+
+                        // PERFORMANCE: Only run animation when in view
+                        ScrollTrigger.create({
+                            trigger: containerRef.current,
+                            start: "top bottom",
+                            end: "bottom top",
+                            onEnter: () => floatingTween.play(),
+                            onLeave: () => floatingTween.pause(),
+                            onEnterBack: () => floatingTween.play(),
+                            onLeaveBack: () => floatingTween.pause()
+                        });
+                    }
+                }
+            );
         }, containerRef);
         return () => ctx.revert();
     }, []);
@@ -144,7 +172,7 @@ const CreatorOfferings = () => {
                     {verticalOfferings.map((offering, index) => (
                         <div
                             key={index}
-                            className="offering-card group gradient-hero backdrop-blur-md border border-primary/10 rounded-3xl p-4 flex flex-col h-full hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 hover:-translate-y-2 opacity-0"
+                            className="offering-card group gradient-hero border border-primary/10 rounded-3xl p-4 flex flex-col h-full hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 hover:-translate-y-2 opacity-0"
                         >
                             <div className="w-[85%] mx-auto aspect-[4/3] rounded-2xl flex flex-col items-center justify-center mb-3 relative overflow-hidden">
                                 {offering.image ? (
@@ -176,7 +204,7 @@ const CreatorOfferings = () => {
                     {horizontalOfferings.map((offering, index) => (
                         <div
                             key={index}
-                            className="offering-card group gradient-hero backdrop-blur-md border border-primary/10 rounded-3xl p-4 flex flex-col md:flex-row gap-4 items-center hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 hover:-translate-y-1 opacity-0"
+                            className="offering-card group gradient-hero border border-primary/10 rounded-3xl p-4 flex flex-col md:flex-row gap-4 items-center hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 hover:-translate-y-1 opacity-0"
                         >
                             <div className="w-full md:w-1/2 aspect-[4/3] rounded-2xl flex flex-col items-center justify-center shrink-0 relative overflow-hidden">
                                 {offering.image ? (

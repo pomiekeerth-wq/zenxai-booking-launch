@@ -111,55 +111,57 @@ const ExclusiveFeatures = () => {
                 y: (i) => -i * 15,
             });
 
+            // Cache footer reference
+            const footer = document.querySelector(".sticky-footer");
+
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: window.innerWidth < 1024 ? cardsContainerRef.current : sectionRef.current,
-                    start: window.innerWidth < 1024 ? "bottom bottom" : "top top",
+                    start: window.innerWidth < 1024 ? "top 5%" : "top top",
                     end: `+=${cards.length * 100}%`,
                     pin: sectionRef.current,
                     pinSpacing: true,
                     scrub: 1,
                     onEnter: () => {
-                        const footer = document.querySelector(".sticky-footer");
                         if (footer) {
                             gsap.to(footer, {
                                 yPercent: 100,
-                                duration: 0.3,
-                                ease: "power2.inOut"
+                                duration: 0.2, // Faster
+                                ease: "power2.inOut",
+                                force3D: true
                             });
                         }
                     },
                     onLeave: () => {
-                        const footer = document.querySelector(".sticky-footer");
                         if (footer) {
                             gsap.to(footer, {
                                 yPercent: 0,
-                                duration: 0.3,
-                                ease: "power2.inOut"
+                                duration: 0.2, // Faster
+                                ease: "power2.inOut",
+                                force3D: true
                             });
                         }
                     },
                     onEnterBack: () => {
-                        const footer = document.querySelector(".sticky-footer");
                         if (footer) {
                             gsap.to(footer, {
                                 yPercent: 100,
-                                duration: 0.3,
-                                ease: "power2.inOut"
+                                duration: 0.2, // Faster
+                                ease: "power2.inOut",
+                                force3D: true
                             });
                         }
                     },
                     onLeaveBack: () => {
-                        const footer = document.querySelector(".sticky-footer");
                         if (footer) {
                             gsap.to(footer, {
                                 yPercent: 0,
-                                duration: 0.3,
-                                ease: "power2.inOut"
+                                duration: 0.2, // Faster
+                                ease: "power2.inOut",
+                                force3D: true
                             });
                         }
                     }
-                    // markers: true,
                 }
             });
 
@@ -172,7 +174,8 @@ const ExclusiveFeatures = () => {
                     opacity: 0,
                     rotate: -15,
                     duration: 1,
-                    ease: "power2.inOut"
+                    ease: "power2.inOut",
+                    force3D: true
                 }, i); // Stagger by scroll position
 
                 // Scale up and move forward the remaining cards as the top one leaves
@@ -180,7 +183,8 @@ const ExclusiveFeatures = () => {
                     scale: (idx) => 1 - idx * 0.05,
                     y: (idx) => -idx * 15,
                     duration: 1,
-                    ease: "power2.inOut"
+                    ease: "power2.inOut",
+                    force3D: true
                 }, i);
             });
         }, sectionRef);
@@ -190,7 +194,7 @@ const ExclusiveFeatures = () => {
 
     return (
         <div id="exclusive-features-container">
-            <section ref={sectionRef} id="exclusive-features" className="bg-[#FAFAFA] relative overflow-hidden min-h-screen flex items-center pt-24 pb-8">
+            <section ref={sectionRef} id="exclusive-features" className="bg-[#FAFAFA] relative overflow-hidden min-h-screen flex items-center pt-10 md:pt-24 pb-52 md:pb-8">
                 {/* Background Decor */}
                 <div className="absolute top-1/4 -right-20 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
@@ -216,11 +220,11 @@ const ExclusiveFeatures = () => {
                         </div>
 
                         {/* RIGHT COLUMN: Stacked Cards */}
-                        <div ref={cardsContainerRef} className="relative w-full aspect-[1/1.6] md:aspect-[16/7] lg:aspect-[1/0.85] max-w-xl mx-auto lg:mx-0">
+                        <div ref={cardsContainerRef} className="relative w-full aspect-[1/2.1] md:aspect-[16/7] lg:aspect-[1/0.85] max-w-xl mx-auto lg:mx-0">
                             {features.map((feature, index) => (
                                 <div
                                     key={feature.title}
-                                    className={`feature-card absolute inset-0 flex flex-col rounded-[2.5rem] p-5 md:p-8 shadow-xl border border-white/20 backdrop-blur-sm ${feature.bgColor} overflow-hidden`}
+                                    className={`feature-card absolute inset-0 flex flex-col rounded-[2.5rem] p-5 md:p-8 shadow-xl border border-white/20 ${feature.bgColor} overflow-hidden`}
                                 >
                                     <div className="flex flex-col h-full">
                                         <div className="flex flex-col gap-6">
