@@ -59,9 +59,8 @@ const ProjectCard = ({ project, isActive, onClick }) => {
                 zIndex: isActive ? 10 : 1,
             }}
             transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30,
+                duration: 0.2,
+                ease: "easeOut",
             }}
             onClick={onClick}
             className="relative cursor-pointer px-2 py-8 flex items-center justify-center h-full"

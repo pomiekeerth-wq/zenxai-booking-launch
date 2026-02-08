@@ -255,6 +255,8 @@ All colors MUST be HSL.
 .sticky-footer {
   will-change: transform, opacity;
   transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
   /* Force GPU */
 }
 
