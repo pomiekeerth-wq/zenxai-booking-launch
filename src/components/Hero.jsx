@@ -173,7 +173,7 @@ const Hero = () => {
                 ref={subheadlineRef}
                 className="text-lg md:text-xl font-medium text-foreground/80 max-w-2xl leading-relaxed"
               >
-                Launch Courses, Workshops, and Memberships, Engage Communities, and Gamify Learning - all under your Own Brand, <span className="text-glitter-white">With Zero Commission</span>.
+                Launch Courses, Workshops, and Memberships, Engage Communities, and Gamify Learning - all under your Own Brand, <span className="highlight-primary">With Zero Commission</span>.
               </p>
 
               {/* CTA BUTTONS */}
