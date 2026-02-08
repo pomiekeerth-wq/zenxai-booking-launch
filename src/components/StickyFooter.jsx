@@ -10,36 +10,14 @@ const StickyFooter = () => {
     const footerRef = useRef(null);
 
     useEffect(() => {
-        let mm = gsap.matchMedia();
-
-        mm.add("(max-width: 1023px)", () => {
-            // Mobile-only ScrollTrigger to hide footer in features section
-            const st = ScrollTrigger.create({
-                trigger: "#exclusive-features-container",
-                start: "top bottom",
-                end: "bottom top",
-                onToggle: (self) => {
-                    gsap.to(footerRef.current, {
-                        yPercent: self.isActive ? 100 : 0,
-                        duration: 0.4,
-                        ease: "power2.inOut"
-                    });
-                }
-            });
-
-            // Ensure ScrollTrigger recalculates after potential layout shifts from pinning
-            setTimeout(() => {
-                ScrollTrigger.refresh();
-            }, 1000);
-        });
-
-        return () => mm.revert();
+        // We use the sticky-footer class to target this component from ExclusiveFeatures.jsx
+        // This avoids conflicts between multiple ScrollTriggers targeting the same section.
     }, []);
 
     return (
         <div
             ref={footerRef}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-foreground border-t border-white/10 py-2.5 px-4 shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.2)]"
+            className="sticky-footer fixed bottom-0 left-0 right-0 z-50 bg-foreground border-t border-white/10 py-2.5 px-4 shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.2)]"
         >
             <div className="container mx-auto flex items-center justify-between gap-2 max-w-6xl">
 
