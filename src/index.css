@@ -249,6 +249,14 @@ All colors MUST be HSL.
   display: inline-block;
 }
 
+/* Performance Optimizations */
+.feature-card,
+.offering-card {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  /* Force GPU */
+}
+
 .highlight-primary {
   position: relative;
   display: inline-block;

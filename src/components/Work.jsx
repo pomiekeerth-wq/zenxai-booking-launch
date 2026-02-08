@@ -135,12 +135,6 @@ const Work = () => {
                     >
                         Previous Works
                     </h2>
-                    <p
-                        ref={subRef}
-                        className="text-muted-foreground text-lg mt-4"
-                    >
-                        Explore some of the premium solutions we've crafted for our clients.
-                    </p>
                 </div>
             </div>
 

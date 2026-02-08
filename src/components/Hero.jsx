@@ -60,9 +60,10 @@ const Hero = () => {
         tl.from(headingSplit.chars, {
           y: 60,
           opacity: 0,
-          duration: 0.8,
-          stagger: 0.02,
+          duration: 0.5, // Faster
+          stagger: 0.015, // Faster
           ease: "power3.out",
+          force3D: true
         });
 
         // Animate Video Container (Start simultaneously with heading)
@@ -70,26 +71,29 @@ const Hero = () => {
           scale: 0.95,
           y: 40,
           opacity: 0,
-          duration: 1.2,
+          duration: 0.8, // Faster
           ease: "power3.out",
+          force3D: true
         }, 0);
 
         // Animate subheadline words
         tl.from(subheadlineSplit.words, {
           y: 40,
           opacity: 0,
-          duration: 0.6,
+          duration: 0.5, // Faster
           stagger: 0.01,
           ease: "power3.out",
-        }, "-=0.8");
+          force3D: true
+        }, "-=0.6");
 
         // Animate CTA buttons
         tl.from(ctaRef.current, {
           y: 20,
           opacity: 0,
-          duration: 0.8,
+          duration: 0.6, // Faster
           ease: "power3.out",
-        }, "-=0.4");
+          force3D: true
+        }, "-=0.3");
       });
 
       // Recalculate ScrollTrigger positions after text splitting
@@ -208,7 +212,7 @@ const Hero = () => {
                 {/* Custom Audio Toggle Button */}
                 <button
                   onClick={toggleAudio}
-                  className="absolute bottom-4 right-4 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm transition-all shadow-lg border border-white/20 group-hover:scale-110"
+                  className="absolute bottom-4 right-4 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all shadow-lg border border-white/20 group-hover:scale-110"
                   aria-label={isMuted ? "Unmute video" : "Mute video"}
                 >
                   {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}

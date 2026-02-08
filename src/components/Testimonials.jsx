@@ -104,7 +104,7 @@ const TestimonialCard = ({ testimonial, onPlay, onEnd }) => {
                             alt={testimonial.name}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div className="relative z-30 w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 transform transition-transform duration-300 group-hover:scale-110 shadow-2xl">
+                        <div className="relative z-30 w-12 h-12 bg-white/50 rounded-full flex items-center justify-center border border-white/40 transform transition-transform duration-300 group-hover:scale-110 shadow-2xl">
                             <Play className="w-6 h-6 text-white fill-white ml-1" />
                         </div>
                     </div>

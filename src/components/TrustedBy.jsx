@@ -36,7 +36,10 @@ const TrustedBy = () => {
             </div>
 
             <div className="relative overflow-x-hidden group">
-                <div className="animate-marquee whitespace-nowrap flex items-center gap-0 w-max">
+                <div
+                    className="animate-marquee whitespace-nowrap flex items-center gap-0 w-max"
+                    style={{ willChange: 'transform' }}
+                >
                     {/* First set of logos */}
                     {logos.map((logo, index) => (
                         <div key={index} className="flex-shrink-0 flex items-center justify-center h-28 md:h-40 cursor-pointer px-6">

@@ -16,7 +16,7 @@ export const useTextAnimation = (ref, options = {}) => {
         y = 50,
         duration = 0.8,
         delay = 0,
-        start = "top 85%"
+        start = "top 80%"
     } = options;
 
     useEffect(() => {
@@ -49,10 +49,11 @@ export const useTextAnimation = (ref, options = {}) => {
             tl.from(target, {
                 y: y,
                 opacity: 0,
-                duration: duration,
-                stagger: stagger,
+                duration: duration * 0.7, // Reduce duration globally
+                stagger: stagger * 0.6, // Increase stagger speed globally
                 delay: delay,
                 ease: "power3.out",
+                force3D: true, // Hardware acceleration
             });
         };
 
