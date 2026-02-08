@@ -250,6 +250,7 @@ All colors MUST be HSL.
 }
 
 /* Performance Optimizations */
+section,
 .feature-card,
 .offering-card,
 .sticky-footer {
@@ -257,6 +258,7 @@ All colors MUST be HSL.
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
   /* Force GPU */
 }
 

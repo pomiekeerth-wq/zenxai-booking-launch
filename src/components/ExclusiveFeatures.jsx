@@ -123,6 +123,7 @@ const ExclusiveFeatures = () => {
                     end: `+=${cards.length * 100}%`,
                     pin: sectionRef.current,
                     pinSpacing: true,
+                    pinType: window.innerWidth < 1024 ? "fixed" : "transform",
                     scrub: true,
                     anticipatePin: 1,
                     onEnter: () => {
@@ -181,7 +182,8 @@ const ExclusiveFeatures = () => {
                     duration: 1,
                     ease: "none",
                     force3D: true,
-                    lazy: true
+                    lazy: true,
+                    willChange: "transform, opacity"
                 }, i); // Stagger by scroll position
 
                 // Scale up and move forward the remaining cards as the top one leaves
@@ -191,7 +193,8 @@ const ExclusiveFeatures = () => {
                     duration: 1,
                     ease: "none",
                     force3D: true,
-                    lazy: true
+                    lazy: true,
+                    willChange: "transform"
                 }, i);
             });
         }, sectionRef);
@@ -202,10 +205,6 @@ const ExclusiveFeatures = () => {
     return (
         <div id="exclusive-features-container">
             <section ref={sectionRef} id="exclusive-features" className="bg-[#FAFAFA] relative overflow-hidden min-h-screen flex items-center pt-10 md:pt-24 pb-52 md:pb-8">
-                {/* Background Decor */}
-                <div className="absolute top-1/4 -right-20 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-
                 <div className="container mx-auto px-4 z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 

@@ -95,7 +95,7 @@ const Process = () => {
                             />
                         </div>
                         {/* Decorative elements behind video */}
-                        <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-[2.5rem] -z-10 blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+
                     </div>
                 </div>
             </div>
