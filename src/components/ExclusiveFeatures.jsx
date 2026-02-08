@@ -113,11 +113,52 @@ const ExclusiveFeatures = () => {
 
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: sectionRef.current,
+                    trigger: window.innerWidth < 1024 ? cardsContainerRef.current : sectionRef.current,
                     start: window.innerWidth < 1024 ? "bottom bottom" : "top top",
                     end: `+=${cards.length * 100}%`,
-                    pin: true,
+                    pin: sectionRef.current,
+                    pinSpacing: true,
                     scrub: 1,
+                    onEnter: () => {
+                        const footer = document.querySelector(".sticky-footer");
+                        if (footer) {
+                            gsap.to(footer, {
+                                yPercent: 100,
+                                duration: 0.3,
+                                ease: "power2.inOut"
+                            });
+                        }
+                    },
+                    onLeave: () => {
+                        const footer = document.querySelector(".sticky-footer");
+                        if (footer) {
+                            gsap.to(footer, {
+                                yPercent: 0,
+                                duration: 0.3,
+                                ease: "power2.inOut"
+                            });
+                        }
+                    },
+                    onEnterBack: () => {
+                        const footer = document.querySelector(".sticky-footer");
+                        if (footer) {
+                            gsap.to(footer, {
+                                yPercent: 100,
+                                duration: 0.3,
+                                ease: "power2.inOut"
+                            });
+                        }
+                    },
+                    onLeaveBack: () => {
+                        const footer = document.querySelector(".sticky-footer");
+                        if (footer) {
+                            gsap.to(footer, {
+                                yPercent: 0,
+                                duration: 0.3,
+                                ease: "power2.inOut"
+                            });
+                        }
+                    }
                     // markers: true,
                 }
             });
@@ -175,7 +216,7 @@ const ExclusiveFeatures = () => {
                         </div>
 
                         {/* RIGHT COLUMN: Stacked Cards */}
-                        <div ref={cardsContainerRef} className="relative w-full aspect-[1/1.05] md:aspect-[16/7] lg:aspect-[1/0.85] max-w-xl mx-auto lg:mx-0">
+                        <div ref={cardsContainerRef} className="relative w-full aspect-[1/1.6] md:aspect-[16/7] lg:aspect-[1/0.85] max-w-xl mx-auto lg:mx-0">
                             {features.map((feature, index) => (
                                 <div
                                     key={feature.title}

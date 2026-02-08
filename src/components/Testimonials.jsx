@@ -65,11 +65,17 @@ const testimonials = [
     },
 ];
 
-const TestimonialCard = ({ testimonial }) => {
+const TestimonialCard = ({ testimonial, onPlay, onEnd }) => {
     const [isPlaying, setIsPlaying] = useState(false);
 
     const onPlayerEnd = () => {
         setIsPlaying(false);
+        onEnd?.();
+    };
+
+    const handlePlay = () => {
+        setIsPlaying(true);
+        onPlay?.();
     };
 
     const videoOptions = {
@@ -89,7 +95,7 @@ const TestimonialCard = ({ testimonial }) => {
         <div className="flex flex-col items-center px-2">
             <div
                 className="w-full aspect-[9/16] rounded-2xl shadow-lg mb-6 overflow-hidden relative group bg-black border border-white/5 cursor-pointer"
-                onClick={() => !isPlaying && setIsPlaying(true)}
+                onClick={() => !isPlaying && handlePlay()}
             >
                 {!isPlaying ? (
                     <div className="absolute inset-0 z-20 flex items-end justify-center pb-12">
@@ -126,10 +132,19 @@ const Testimonials = () => {
     const headingRef = useRef(null);
     const subRef = useRef(null);
     const labelRef = useRef(null);
+    const [api, setApi] = useState(null);
 
     useTextAnimation(headingRef);
     useTextAnimation(subRef, { type: "words", delay: 0.2 });
     useTextAnimation(labelRef, { type: "words", delay: 0.1 });
+
+    const handleVideoPlay = () => {
+        api?.plugins()?.autoplay?.stop();
+    };
+
+    const handleVideoEnd = () => {
+        api?.plugins()?.autoplay?.play();
+    };
 
     return (
         <section id="testimonials" className="pt-0 pb-24 bg-background">
@@ -153,6 +168,7 @@ const Testimonials = () => {
 
                 <div className="max-w-7xl mx-auto relative px-12">
                     <Carousel
+                        setApi={setApi}
                         opts={{
                             align: "start",
                             loop: true,
@@ -170,7 +186,11 @@ const Testimonials = () => {
                                 <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                                     <div className="flex justify-center">
                                         <div className="w-full max-w-[260px]">
-                                            <TestimonialCard testimonial={testimonial} />
+                                            <TestimonialCard
+                                                testimonial={testimonial}
+                                                onPlay={handleVideoPlay}
+                                                onEnd={handleVideoEnd}
+                                            />
                                         </div>
                                     </div>
                                 </CarouselItem>
