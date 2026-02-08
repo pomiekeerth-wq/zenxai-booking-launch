@@ -121,7 +121,8 @@ const ExclusiveFeatures = () => {
                     end: `+=${cards.length * 100}%`,
                     pin: sectionRef.current,
                     pinSpacing: true,
-                    scrub: 1,
+                    scrub: true,
+                    anticipatePin: 1,
                     onEnter: () => {
                         if (footer) {
                             gsap.to(footer, {
@@ -174,8 +175,9 @@ const ExclusiveFeatures = () => {
                     opacity: 0,
                     rotate: -15,
                     duration: 1,
-                    ease: "power2.inOut",
-                    force3D: true
+                    ease: "none",
+                    force3D: true,
+                    lazy: true
                 }, i); // Stagger by scroll position
 
                 // Scale up and move forward the remaining cards as the top one leaves
@@ -183,8 +185,9 @@ const ExclusiveFeatures = () => {
                     scale: (idx) => 1 - idx * 0.05,
                     y: (idx) => -idx * 15,
                     duration: 1,
-                    ease: "power2.inOut",
-                    force3D: true
+                    ease: "none",
+                    force3D: true,
+                    lazy: true
                 }, i);
             });
         }, sectionRef);

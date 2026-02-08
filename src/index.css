@@ -251,7 +251,8 @@ All colors MUST be HSL.
 
 /* Performance Optimizations */
 .feature-card,
-.offering-card {
+.offering-card,
+.sticky-footer {
   will-change: transform, opacity;
   transform: translateZ(0);
   /* Force GPU */
