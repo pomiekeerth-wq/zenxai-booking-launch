@@ -3,6 +3,10 @@ import { useTextAnimation } from "@/hooks/useTextAnimation";
 import workflowVideo from "../assets/LMS WORKFLOW.mp4";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Process = () => {
     const headingRef = useRef(null);
@@ -13,6 +17,36 @@ const Process = () => {
     useTextAnimation(subRef, { type: "words", delay: 0.1 });
 
     useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Text reveal
+            gsap.from([headingRef.current, subRef.current], {
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: "power4.out",
+                scrollTrigger: {
+                    trigger: headingRef.current,
+                    start: "top 90%",
+                    once: true
+                }
+            });
+
+            // Video reveal
+            gsap.from(videoRef.current, {
+                scale: 0.98,
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                ease: "power4.out",
+                scrollTrigger: {
+                    trigger: videoRef.current,
+                    start: "top 85%",
+                    once: true
+                }
+            });
+        }, sectionRef);
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -31,9 +65,8 @@ const Process = () => {
         }
 
         return () => {
-            if (videoRef.current) {
-                observer.unobserve(videoRef.current);
-            }
+            if (videoRef.current) observer.unobserve(videoRef.current);
+            ctx.revert();
         };
     }, []);
 
@@ -44,8 +77,10 @@ const Process = () => {
         }
     };
 
+    const sectionRef = useRef(null);
+
     return (
-        <section id="process" className="relative py-12 overflow-hidden">
+        <section ref={sectionRef} id="process" className="relative py-12 overflow-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0 bg-white/20 -z-20"></div>
             <div className="absolute top-0 -left-4 w-96 h-96 bg-primary/10 rounded-full mix-blend-multiply opacity-50"></div>

@@ -10,6 +10,10 @@ import zenvoice from "@/assets/works/zenvoice.jpeg";
 import zenxai from "@/assets/works/zenxai.jpeg";
 import zxlearn from "@/assets/works/zxlearn.png";
 import { useTextAnimation } from "@/hooks/useTextAnimation";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
     {
@@ -59,8 +63,8 @@ const ProjectCard = ({ project, isActive, onClick }) => {
                 zIndex: isActive ? 10 : 1,
             }}
             transition={{
-                duration: 0.2,
-                ease: "easeOut",
+                duration: 0.3,
+                ease: [0.16, 1, 0.3, 1], // Snappy Expo Out
             }}
             onClick={onClick}
             className="relative cursor-pointer px-2 py-8 flex items-center justify-center h-full"
@@ -118,6 +122,25 @@ const Work = () => {
         onSelect();
         emblaApi.on("select", onSelect);
         emblaApi.on("reInit", onSelect);
+
+        const ctx = gsap.context(() => {
+            gsap.from(".embla-container-work", {
+                x: 50,
+                opacity: 0,
+                duration: 0.6,
+                ease: "power4.out",
+                force3D: true,
+                scrollTrigger: {
+                    trigger: ".embla-container-work",
+                    start: "top 90%",
+                    once: true
+                }
+            });
+        });
+
+        return () => {
+            ctx.revert();
+        };
     }, [emblaApi, onSelect]);
 
     const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
@@ -143,7 +166,7 @@ const Work = () => {
                     style={{ touchAction: 'pan-y' }}
                     ref={emblaRef}
                 >
-                    <div className="flex -ml-4">
+                    <div className="flex -ml-4 embla-container-work">
                         {projects.map((project, index) => (
                             <div key={index} className="flex-[0_0_80%] md:flex-[0_0_45%] lg:flex-[0_0_35%] pl-4 min-w-0">
                                 <ProjectCard

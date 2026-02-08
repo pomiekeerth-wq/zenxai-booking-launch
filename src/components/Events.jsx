@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import aifortn1 from "@/assets/aifortn/aifortn1.jpeg";
 import aifortn2 from "@/assets/aifortn/aifortn2.jpeg";
 import aifortn6 from "@/assets/aifortn/aifortn6.jpeg";
@@ -6,6 +6,10 @@ import aifortn3 from "@/assets/aifortn/f7hxcmqdsy5hqbjn8waw.jpeg";
 import aifortn4 from "@/assets/aifortn/lvciezv4rjm9opeimmzr.jpeg";
 import aifortn5 from "@/assets/aifortn/tplzdh94hocllpyd9pad.jpeg";
 import { useTextAnimation } from "@/hooks/useTextAnimation";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const eventImages = [
     { src: aifortn1, alt: "Event photo 1" },
@@ -21,6 +25,25 @@ const Events = () => {
     useTextAnimation(headingRef);
     useTextAnimation(subRef, { type: "words", delay: 0.2 });
     useTextAnimation(labelRef, { type: "words", delay: 0.1 });
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".event-card", {
+                y: 30,
+                opacity: 0,
+                duration: 0.5,
+                stagger: 0.1,
+                ease: "power4.out",
+                force3D: true,
+                scrollTrigger: {
+                    trigger: ".event-card",
+                    start: "top 90%",
+                    once: true
+                }
+            });
+        });
+        return () => ctx.revert();
+    }, []);
 
     return (
         <section className="pt-12 pb-8 bg-muted/30">
@@ -42,7 +65,7 @@ const Events = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {eventImages.map((image, index) => (
-                        <div key={index} className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 aspect-[4/3] group relative">
+                        <div key={index} className="event-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 aspect-[4/3] group relative">
                             <img
                                 src={image.src}
                                 alt={image.alt}

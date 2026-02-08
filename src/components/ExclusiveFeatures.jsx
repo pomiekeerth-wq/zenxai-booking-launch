@@ -95,10 +95,11 @@ const features = [
 
 const ExclusiveFeatures = () => {
     const sectionRef = useRef(null);
+    const triggerRef = useRef(null);
     const headingRef = useRef(null);
+    const headingContainerRef = useRef(null);
     const cardsContainerRef = useRef(null);
     const footerRef = useRef(null);
-    useTextAnimation(headingRef);
 
     useEffect(() => {
         const cards = gsap.utils.toArray(".feature-card");
@@ -110,6 +111,7 @@ const ExclusiveFeatures = () => {
                 zIndex: (i) => cards.length - i,
                 scale: (i) => 1 - i * 0.05,
                 y: (i) => -i * 15,
+                force3D: true
             });
 
             // Cache footer reference
@@ -118,58 +120,43 @@ const ExclusiveFeatures = () => {
 
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: window.innerWidth < 1024 ? cardsContainerRef.current : sectionRef.current,
-                    start: window.innerWidth < 1024 ? "top 5%" : "top top",
+                    trigger: triggerRef.current, // Use a non-pinned proxy trigger
+                    start: "top top",
                     end: `+=${cards.length * 100}%`,
                     pin: sectionRef.current,
                     pinSpacing: true,
-                    pinType: window.innerWidth < 1024 ? "fixed" : "transform",
                     scrub: true,
-                    anticipatePin: 1,
+                    anticipatePin: 1.5,
+                    fastScrollEnd: false,
                     onEnter: () => {
-                        if (footer) {
-                            gsap.to(footer, {
-                                yPercent: 100,
-                                duration: 0.2, // Faster
-                                ease: "power2.inOut",
-                                force3D: true
-                            });
-                        }
+                        const footer = document.querySelector(".sticky-footer");
+                        if (footer) gsap.to(footer, { yPercent: 100, duration: 0.2, ease: "power2.inOut", force3D: true });
                     },
                     onLeave: () => {
-                        if (footer) {
-                            gsap.to(footer, {
-                                yPercent: 0,
-                                duration: 0.2, // Faster
-                                ease: "power2.inOut",
-                                force3D: true
-                            });
-                        }
+                        const footer = document.querySelector(".sticky-footer");
+                        if (footer) gsap.to(footer, { yPercent: 0, duration: 0.2, ease: "power2.inOut", force3D: true });
                     },
                     onEnterBack: () => {
-                        if (footer) {
-                            gsap.to(footer, {
-                                yPercent: 100,
-                                duration: 0.2, // Faster
-                                ease: "power2.inOut",
-                                force3D: true
-                            });
-                        }
+                        const footer = document.querySelector(".sticky-footer");
+                        if (footer) gsap.to(footer, { yPercent: 100, duration: 0.2, ease: "power2.inOut", force3D: true });
                     },
                     onLeaveBack: () => {
-                        if (footer) {
-                            gsap.to(footer, {
-                                yPercent: 0,
-                                duration: 0.2, // Faster
-                                ease: "power2.inOut",
-                                force3D: true
-                            });
-                        }
-                    },
-                    fastScrollEnd: true,
-                    invalidateOnRefresh: true,
+                        const footer = document.querySelector(".sticky-footer");
+                        if (footer) gsap.to(footer, { yPercent: 0, duration: 0.2, ease: "power2.inOut", force3D: true });
+                    }
                 }
             });
+
+            // HIDE TITLE ON MOBILE during pin to give full screen to cards
+            if (window.innerWidth < 1024) {
+                tl.to(headingContainerRef.current, {
+                    autoAlpha: 0,
+                    height: 0,
+                    marginBottom: 0,
+                    duration: 0.4,
+                    ease: "power4.inOut"
+                }, 0);
+            }
 
             // Animate cards one by one
             cards.forEach((card, i) => {
@@ -178,24 +165,25 @@ const ExclusiveFeatures = () => {
                 tl.to(card, {
                     xPercent: -120,
                     opacity: 0,
-                    rotate: -15,
+                    rotate: 0,
                     duration: 1,
                     ease: "none",
                     force3D: true,
-                    lazy: true,
-                    willChange: "transform, opacity"
+                    lazy: true
                 }, i); // Stagger by scroll position
 
-                // Scale up and move forward the remaining cards as the top one leaves
-                tl.to(cards.slice(i + 1), {
-                    scale: (idx) => 1 - idx * 0.05,
-                    y: (idx) => -idx * 15,
-                    duration: 1,
-                    ease: "none",
-                    force3D: true,
-                    lazy: true,
-                    willChange: "transform"
-                }, i);
+                // Only animate the next card to reduce simultaneous transforms
+                const nextCard = cards[i + 1];
+                if (nextCard) {
+                    tl.to(nextCard, {
+                        scale: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "none",
+                        force3D: true,
+                        lazy: true
+                    }, i);
+                }
             });
         }, sectionRef);
 
@@ -203,16 +191,19 @@ const ExclusiveFeatures = () => {
     }, []);
 
     return (
-        <div id="exclusive-features-container">
-            <section ref={sectionRef} id="exclusive-features" className="bg-[#FAFAFA] relative overflow-hidden min-h-screen flex items-center pt-10 md:pt-24 pb-52 md:pb-8">
+        <div id="exclusive-features-container" className="relative">
+            {/* Proxy trigger that stays in flow */}
+            <div ref={triggerRef} className="absolute top-0 left-0 w-full h-1 pointer-events-none" />
+
+            <section ref={sectionRef} id="exclusive-features" className="bg-[#FAFAFA] relative min-h-screen flex items-center pt-6 md:pt-24 pb-24 md:pb-8">
                 <div className="container mx-auto px-4 z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center">
 
                         {/* LEFT COLUMN: Heading */}
-                        <div className="max-w-xl">
+                        <div ref={headingContainerRef} className="max-w-xl overflow-hidden">
                             <h2
                                 ref={headingRef}
-                                className="text-5xl md:text-7xl font-black text-slate-900 leading-[1.1] tracking-tight mb-4 md:mb-8"
+                                className="text-4xl md:text-7xl font-black text-slate-900 leading-[1.1] tracking-tight mb-4 md:mb-8"
                             >
                                 Exclusive features that <br />
                                 <span className="text-primary">help you grow</span>
@@ -226,32 +217,32 @@ const ExclusiveFeatures = () => {
                         </div>
 
                         {/* RIGHT COLUMN: Stacked Cards */}
-                        <div ref={cardsContainerRef} className="relative w-full aspect-[1/2.1] md:aspect-[16/7] lg:aspect-[1/0.85] max-w-xl mx-auto lg:mx-0">
+                        <div ref={cardsContainerRef} className="relative w-full aspect-[1/1.5] sm:aspect-[1/1.2] md:aspect-[16/7] lg:aspect-[1/0.85] max-w-xl mx-auto lg:mx-0">
                             {features.map((feature, index) => (
                                 <div
                                     key={feature.title}
-                                    className={`feature-card absolute inset-0 flex flex-col rounded-[2.5rem] p-5 md:p-8 shadow-xl border border-white/20 ${feature.bgColor} overflow-hidden`}
+                                    className={`feature-card absolute inset-0 flex flex-col rounded-[2rem] md:rounded-[2.5rem] p-4 md:p-8 shadow-xl border border-white/20 ${feature.bgColor} overflow-hidden`}
                                 >
                                     <div className="flex flex-col h-full">
-                                        <div className="flex flex-col gap-6">
+                                        <div className="flex flex-col gap-3 md:gap-6">
                                             <div>
-                                                <h3 className="text-2xl md:text-3xl font-black text-slate-900 leading-tight mb-4">
+                                                <h3 className="text-xl md:text-3xl font-black text-slate-900 leading-tight mb-2 md:mb-4">
                                                     {feature.title}
                                                 </h3>
-                                                <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-4">
+                                                <p className="text-slate-600 text-sm md:text-lg leading-relaxed mb-2 md:mb-4">
                                                     {feature.description}
                                                 </p>
                                             </div>
                                         </div>
 
                                         {/* Bulletins */}
-                                        <div className="grid grid-cols-1 gap-4">
+                                        <div className="grid grid-cols-1 gap-2 md:gap-4">
                                             {feature.points.map((point, i) => (
-                                                <div key={i} className="flex items-center gap-3 group">
+                                                <div key={i} className="flex items-center gap-2 md:gap-3 group">
                                                     <div className={`p-1 rounded-full bg-white/50 shadow-sm transition-transform duration-300 group-hover:scale-110 ${feature.accentColor}`}>
-                                                        <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5" />
+                                                        <CheckCircle2 className="w-3.5 h-3.5 md:w-5 md:h-5" />
                                                     </div>
-                                                    <span className="text-slate-800 font-semibold text-base md:text-lg">
+                                                    <span className="text-slate-800 font-semibold text-sm md:text-lg">
                                                         {point}
                                                     </span>
                                                 </div>

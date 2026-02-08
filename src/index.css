@@ -106,9 +106,10 @@ All colors MUST be HSL.
     overflow: hidden;
     display: flex;
     box-shadow: 0 0 30px hsla(var(--primary) / 0.4);
-    animation: lightning-glow 4s infinite alternate;
+    /* Only animate if user prefers motion and not on low-end */
   }
 
+  /* Reduce animation complexity for lightning border */
   .lightning-border::before {
     content: '';
     position: absolute;
@@ -250,16 +251,19 @@ All colors MUST be HSL.
 }
 
 /* Performance Optimizations */
-section,
 .feature-card,
 .offering-card,
 .sticky-footer {
-  will-change: transform, opacity;
-  transform: translateZ(0);
+  /* Remove aggressive will-change to stop flickering */
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  perspective: 1000px;
   -webkit-font-smoothing: antialiased;
-  /* Force GPU */
+}
+
+section {
+  /* Remove global hardware lock to save GPU memory on mobile */
+  position: relative;
+  overflow: hidden;
 }
 
 .highlight-primary {
@@ -327,16 +331,48 @@ section,
 
 @keyframes shimmer {
   from {
-    left: -100%;
+    transform: translateX(-100%);
   }
 
   to {
-    left: 100%;
+    transform: translateX(100%);
   }
 }
 
 .animate-shimmer {
   animation: shimmer 2s infinite;
+  will-change: transform;
+}
+
+
+/* Snappy Interactive Feedback */
+button,
+.button,
+a.inline-flex,
+a.flex-shrink-0 {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button:hover,
+.button:hover,
+a.inline-flex:hover {
+  transform: scale(1.02);
+}
+
+button:active,
+.button:active,
+a.inline-flex:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  button,
+  .button,
+  a {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 /* Base styles */
