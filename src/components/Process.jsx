@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Process = () => {
+const Process = ({ onBookCall }) => {
     const headingRef = useRef(null);
     const subRef = useRef(null);
     const videoRef = useRef(null);
@@ -101,20 +101,14 @@ const Process = () => {
                             Our streamlined process ensures you spend less time setting up and more time earning. Watch how easy it is to get your academy up and running.
                         </p>
 
-                        <a
-                            href="https://harivikash-b.dayschedule.com/1-on-1-for-booking-system"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block"
+                        <Button
+                            onClick={onBookCall}
+                            size="lg"
+                            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 h-auto text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
                         >
-                            <Button
-                                size="lg"
-                                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 h-auto text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-                            >
-                                Book a Call
-                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Button>
-                        </a>
+                            Book a Call
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </Button>
                     </div>
 
                     {/* Video Column */}

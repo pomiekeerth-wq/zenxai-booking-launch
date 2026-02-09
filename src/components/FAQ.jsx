@@ -32,7 +32,7 @@ const faqs = [
     },
 ];
 
-const FAQ = () => {
+const FAQ = ({ onBookCall }) => {
     const headingRef = useRef(null);
     const subRef = useRef(null);
     const labelRef = useRef(null);
@@ -58,22 +58,16 @@ const FAQ = () => {
                         Talk to our specialist and find out why creators love us so much.
                     </p>
 
-                    <a
-                        href="https://harivikash-b.dayschedule.com/1-on-1-for-booking-system"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block"
+                    <Button
+                        onClick={onBookCall}
+                        className="w-full max-w-2xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 h-auto text-lg rounded-xl shadow-lg relative overflow-hidden group"
                     >
-                        <Button
-                            className="w-full max-w-2xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 h-auto text-lg rounded-xl shadow-lg relative overflow-hidden group"
-                        >
-                            <span className="relative z-10 flex items-center gap-2">
-                                Book a Call
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </span>
-                            <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shimmer" />
-                        </Button>
-                    </a>
+                        <span className="relative z-10 flex items-center gap-2">
+                            Book a Call
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                        <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-shimmer" />
+                    </Button>
                 </div>
 
                 <div className="max-w-2xl mx-auto">
