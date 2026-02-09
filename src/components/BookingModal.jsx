@@ -54,7 +54,7 @@ const BookingModal = ({ isOpen, onClose }) => {
 
                             {/* Form */}
                             <form
-                                action="https://formsubmit.co/hello@zenxai.io"
+                                action="https://formsubmit.co/dharun@hexitetechnologies.com"
                                 method="POST"
                                 className="p-8 space-y-6"
                             >
