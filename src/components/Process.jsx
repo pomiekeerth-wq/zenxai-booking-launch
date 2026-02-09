@@ -104,7 +104,7 @@ const Process = ({ onBookCall }) => {
                         <Button
                             onClick={onBookCall}
                             size="lg"
-                            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 h-auto text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 h-auto text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
                         >
                             Book a Call
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

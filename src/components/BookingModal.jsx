@@ -16,14 +16,6 @@ const BookingModal = ({ isOpen, onClose }) => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // In a real application, you would save this lead data here
-        console.log("Lead Captured:", formData);
-
-        // Redirect to the schedule page
-        window.location.href = "https://harivikash-b.dayschedule.com/1-on-1-for-booking-system";
-    };
 
     return (
         <AnimatePresence>
@@ -61,7 +53,16 @@ const BookingModal = ({ isOpen, onClose }) => {
                             </div>
 
                             {/* Form */}
-                            <form onSubmit={handleSubmit} className="p-8 space-y-6">
+                            <form
+                                action="https://formsubmit.co/hello@zenxai.io"
+                                method="POST"
+                                className="p-8 space-y-6"
+                            >
+                                {/* FormSubmit Configuration */}
+                                <input type="hidden" name="_next" value="https://harivikash-b.dayschedule.com/1-on-1-for-booking-system" />
+                                <input type="hidden" name="_subject" value="New Consultation Booking Lead" />
+                                <input type="hidden" name="_captcha" value="false" />
+
                                 <div className="space-y-4">
                                     {/* Name Field */}
                                     <div className="relative group">
@@ -73,7 +74,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                             placeholder="Your Name"
                                             value={formData.name}
                                             onChange={handleChange}
-                                            className="w-full pl-12 pr-4 py-4 bg-secondary/50 border-none rounded-2xl focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                            className="w-full pl-12 pr-4 py-4 bg-secondary/50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                         />
                                     </div>
 
@@ -87,7 +88,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                             placeholder="Mobile Number"
                                             value={formData.mobile}
                                             onChange={handleChange}
-                                            className="w-full pl-12 pr-4 py-4 bg-secondary/50 border-none rounded-2xl focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                            className="w-full pl-12 pr-4 py-4 bg-secondary/50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                         />
                                     </div>
 
@@ -101,7 +102,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                             placeholder="Email Address"
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="w-full pl-12 pr-4 py-4 bg-secondary/50 border-none rounded-2xl focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                            className="w-full pl-12 pr-4 py-4 bg-secondary/50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                         />
                                     </div>
 
@@ -115,14 +116,14 @@ const BookingModal = ({ isOpen, onClose }) => {
                                             placeholder="Company Name"
                                             value={formData.company}
                                             onChange={handleChange}
-                                            className="w-full pl-12 pr-4 py-4 bg-secondary/50 border-none rounded-2xl focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                            className="w-full pl-12 pr-4 py-4 bg-secondary/50 border-none rounded-lg focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                         />
                                     </div>
                                 </div>
 
                                 <Button
                                     type="submit"
-                                    className="w-full py-7 text-lg font-bold rounded-2xl bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 group"
+                                    className="w-full py-7 text-lg font-bold rounded-lg bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 group"
                                 >
                                     Next
                                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

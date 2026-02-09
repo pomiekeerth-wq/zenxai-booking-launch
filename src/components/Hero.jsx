@@ -174,12 +174,12 @@ const Hero = ({ onBookCall }) => {
                 Launch Courses, Workshops, and Memberships, Engage Communities, and Gamify Learning - all under your Own Brand, <span className="highlight-primary">With Zero Commission</span>.
               </p>
 
-              {/* CTA BUTTONS */}
-              <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-start">
+              {/* DESKTOP CTA (Hidden on mobile) */}
+              <div className="hidden sm:flex">
                 <Button
                   onClick={onBookCall}
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 shadow-lg text-primary-foreground text-lg px-8 py-6 rounded-full"
+                  className="bg-primary hover:bg-primary/90 shadow-lg text-primary-foreground text-lg px-8 py-6 rounded-lg w-auto"
                 >
                   Book a Call
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -187,8 +187,21 @@ const Hero = ({ onBookCall }) => {
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Vertical Video (Reel Ratio) */}
-            <div ref={videoRef} className="flex justify-center lg:justify-center">
+            {/* RIGHT COLUMN: CTA + Vertical Video (Reel Ratio) */}
+            <div ref={videoRef} className="flex flex-col items-center gap-6">
+              {/* MOBILE CTA (Visible only on mobile, same width as video) */}
+              <div ref={ctaRef} className="w-full max-w-[280px] sm:hidden">
+                <Button
+                  onClick={onBookCall}
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 shadow-lg text-primary-foreground text-lg px-8 py-6 rounded-lg w-full"
+                >
+                  Book a Call
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </div>
+
+              {/* VIDEO FRAME */}
               <div className="relative w-full max-w-[280px] aspect-[9/16] lightning-border shadow-2xl group">
                 <div className="lightning-border-inner">
                   <iframe

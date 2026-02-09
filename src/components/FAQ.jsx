@@ -60,7 +60,7 @@ const FAQ = ({ onBookCall }) => {
 
                     <Button
                         onClick={onBookCall}
-                        className="w-full max-w-2xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 h-auto text-lg rounded-xl shadow-lg relative overflow-hidden group"
+                        className="w-full max-w-2xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 h-auto text-lg rounded-lg shadow-lg relative overflow-hidden group"
                     >
                         <span className="relative z-10 flex items-center gap-2">
                             Book a Call
