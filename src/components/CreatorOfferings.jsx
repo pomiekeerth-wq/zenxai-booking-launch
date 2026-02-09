@@ -5,11 +5,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTextAnimation } from "@/hooks/useTextAnimation";
 
 // Import images from src/assets/creators
-import creatorImg1 from "../assets/creators/zxlearning1.png";
-import creatorImg2 from "../assets/creators/learn2.png";
-import creatorImg3 from "../assets/creators/learn3.png";
-import creatorImg4 from "../assets/creators/learn4.png";
-import creatorImg5 from "../assets/creators/learn5.png";
+import creatorImg1 from "../assets/creators/zxlearning1.jpg";
+import creatorImg2 from "../assets/creators/learn2.jpg";
+import creatorImg3 from "../assets/creators/learn3.jpg";
+import creatorImg4 from "../assets/creators/learn4.jpg";
+import creatorImg5 from "../assets/creators/learn5.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -180,7 +180,7 @@ const CreatorOfferings = () => {
                                         <img
                                             src={offering.image}
                                             alt={offering.title}
-                                            className={`${index === 0 ? "w-full h-full object-cover" : "max-w-full max-h-full object-contain"} transform group-hover:scale-105 transition-transform duration-500`}
+                                            className={`${(index === 0 || index === 1 || index === 2) ? "w-full h-full object-cover" : "max-w-full max-h-full object-contain"} transform group-hover:scale-105 transition-transform duration-500`}
                                         />
                                     </div>
                                 ) : (
