@@ -42,21 +42,21 @@ const TrustedBy = () => {
                 >
                     {/* First set of logos */}
                     {logos.map((logo, index) => (
-                        <div key={index} className="flex-shrink-0 flex items-center justify-center h-28 md:h-40 cursor-pointer px-6">
+                        <div key={index} className="flex-shrink-0 flex items-center justify-center h-36 md:h-40 cursor-pointer px-3 md:px-6">
                             <img
                                 src={logo}
                                 alt={`Trusted Partner ${index + 1}`}
-                                className="h-16 md:h-24 w-auto object-contain grayscale-0 hover:grayscale-0 opacity-100"
+                                className="h-24 md:h-24 w-auto object-contain grayscale-0 hover:grayscale-0 opacity-100"
                             />
                         </div>
                     ))}
                     {/* Duplicate set for seamless scrolling */}
                     {logos.map((logo, index) => (
-                        <div key={`dup-${index}`} className="flex-shrink-0 flex items-center justify-center h-28 md:h-40 cursor-pointer px-6">
+                        <div key={`dup-${index}`} className="flex-shrink-0 flex items-center justify-center h-36 md:h-40 cursor-pointer px-3 md:px-6">
                             <img
                                 src={logo}
                                 alt={`Trusted Partner ${index + 1}`}
-                                className="h-16 md:h-24 w-auto object-contain grayscale-0 hover:grayscale-0 opacity-100"
+                                className="h-24 md:h-24 w-auto object-contain grayscale-0 hover:grayscale-0 opacity-100"
                             />
                         </div>
                     ))}

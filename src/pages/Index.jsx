@@ -1,4 +1,4 @@
-// import Header from "@/components/Header";
+import { useState } from "react";
 import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import CreatorOfferings from "@/components/CreatorOfferings";
@@ -12,28 +12,39 @@ import FAQ from "@/components/FAQ";
 import BookConsultation from "@/components/BookConsultation";
 import Footer from "@/components/Footer";
 import StickyFooter from "@/components/StickyFooter";
+import BookingModal from "@/components/BookingModal";
 
 
 const Index = () => {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  const openBookingModal = () => setIsBookingModalOpen(true);
+  const closeBookingModal = () => setIsBookingModalOpen(false);
+
   return (
     <div className="min-h-screen bg-background">
       {/* <Header /> */}
       <main>
-        <Hero />
+        <Hero onBookCall={openBookingModal} />
         <TrustedBy />
         <CreatorOfferings />
         <ExclusiveFeatures />
         <Testimonials />
-        <Process />
+        <Process onBookCall={openBookingModal} />
         <Work />
         <Events />
 
-        <FAQ />
-        <BookConsultation />
+        <FAQ onBookCall={openBookingModal} />
+        <BookConsultation onBookCall={openBookingModal} />
       </main>
 
-      <StickyFooter />
+      <StickyFooter onBookCall={openBookingModal} />
       <Footer />
+
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={closeBookingModal}
+      />
     </div>
   );
 };

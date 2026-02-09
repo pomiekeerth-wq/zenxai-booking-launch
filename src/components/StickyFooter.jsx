@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const StickyFooter = () => {
+const StickyFooter = ({ onBookCall }) => {
     const footerRef = useRef(null);
 
     useEffect(() => {
@@ -28,20 +28,14 @@ const StickyFooter = () => {
                     </div>
                 </div>
 
-                <a
-                    href="https://harivikash-b.dayschedule.com/1-on-1-for-booking-system"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-shrink-0"
+                <Button
+                    onClick={onBookCall}
+                    size="sm"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xs sm:text-sm md:text-lg rounded-full shadow-lg hover:shadow-primary/25 transition-all px-4 sm:px-6 h-9 sm:h-11 flex-shrink-0"
                 >
-                    <Button
-                        size="sm"
-                        className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xs sm:text-sm md:text-lg rounded-full shadow-lg hover:shadow-primary/25 transition-all px-4 sm:px-6 h-9 sm:h-11"
-                    >
-                        Book Now
-                        <ArrowRight className="ml-1.5 w-3.5 h-3.5 sm:w-5 sm:h-5 animate-pulse" />
-                    </Button>
-                </a>
+                    Book Now
+                    <ArrowRight className="ml-1.5 w-3.5 h-3.5 sm:w-5 sm:h-5 animate-pulse" />
+                </Button>
             </div>
         </div>
     );

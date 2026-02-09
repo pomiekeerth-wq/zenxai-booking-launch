@@ -67,7 +67,7 @@ const TickingWord = () => {
     );
 };
 
-const BookConsultation = () => {
+const BookConsultation = ({ onBookCall }) => {
     const headingRef = useRef(null);
     const subRef = useRef(null);
 
@@ -98,12 +98,13 @@ const BookConsultation = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="https://harivikash-b.dayschedule.com/1-on-1-for-booking-system" target="_blank" rel="noopener noreferrer">
-                                <Button className="bg-white text-primary hover:bg-white/90 font-bold px-6 py-3 h-auto shadow-lg">
-                                    Book a Call
-                                    <ArrowRight className="ml-2 w-4 h-4" />
-                                </Button>
-                            </a>
+                            <Button
+                                onClick={onBookCall}
+                                className="bg-white text-primary hover:bg-white/90 font-bold px-6 py-3 h-auto shadow-lg"
+                            >
+                                Book a Call
+                                <ArrowRight className="ml-2 w-4 h-4" />
+                            </Button>
                         </div>
                     </div>
                 </div>

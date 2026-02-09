@@ -8,7 +8,7 @@ import compname from "@/assets/new_logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero = () => {
+const Hero = ({ onBookCall }) => {
   const headingRef = useRef(null);
   const subheadlineRef = useRef(null);
   const ctaRef = useRef(null);
@@ -176,15 +176,14 @@ const Hero = () => {
 
               {/* CTA BUTTONS */}
               <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-start">
-                <a href="https://harivikash-b.dayschedule.com/1-on-1-for-booking-system" target="_blank" rel="noopener noreferrer">
-                  <Button
-                    size="lg"
-                    className="bg-primary hover:bg-primary/90 shadow-lg text-primary-foreground text-lg px-8 py-6 rounded-full"
-                  >
-                    Book a Call
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </a>
+                <Button
+                  onClick={onBookCall}
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 shadow-lg text-primary-foreground text-lg px-8 py-6 rounded-full"
+                >
+                  Book a Call
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
               </div>
             </div>
 
