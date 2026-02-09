@@ -22,9 +22,9 @@ const StickyFooter = ({ onBookCall }) => {
             <div className="container mx-auto flex items-center justify-between gap-2 max-w-6xl">
 
                 <div className="flex flex-row items-center gap-3 text-left">
-                    <div className="flex items-center gap-3 bg-white/5 px-3 py-1 rounded-full border border-white/10 scale-90 sm:scale-100">
-                        <span className="text-white/40 line-through text-sm sm:text-lg font-medium">₹299</span>
-                        <span className="text-primary font-black text-lg sm:text-2xl md:text-3xl">₹99</span>
+                    <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                        <span className="text-white/40 line-through text-lg sm:text-xl font-medium">₹299</span>
+                        <span className="text-primary font-black text-2xl sm:text-4xl md:text-5xl">₹99</span>
                     </div>
                 </div>
 
