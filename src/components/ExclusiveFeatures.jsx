@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CheckCircle2 } from "lucide-react";
@@ -133,6 +133,18 @@ const ExclusiveFeatures = () => {
     const headingRef = useRef(null);
     const headingContainerRef = useRef(null);
     const cardsContainerRef = useRef(null);
+    const [api, setApi] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        if (!api) return;
+
+        setCurrentIndex(api.selectedScrollSnap());
+
+        api.on("select", () => {
+            setCurrentIndex(api.selectedScrollSnap());
+        });
+    }, [api]);
 
     useEffect(() => {
         const cards = gsap.utils.toArray(".feature-card");
@@ -236,7 +248,11 @@ const ExclusiveFeatures = () => {
                         <div className="w-full lg:max-w-xl mx-auto lg:mx-0">
                             {/* Mobile Carousel */}
                             <div className="lg:hidden">
-                                <Carousel className="w-full" opts={{ align: "start", loop: false }}>
+                                <Carousel
+                                    setApi={setApi}
+                                    className="w-full"
+                                    opts={{ align: "start", loop: false }}
+                                >
                                     <CarouselContent className="-ml-4">
                                         {features.map((feature, index) => (
                                             <CarouselItem key={index} className="pl-4 basis-[90%] sm:basis-[80%]">
@@ -248,7 +264,15 @@ const ExclusiveFeatures = () => {
                                     </CarouselContent>
                                     <div className="flex justify-center gap-2 mt-8 lg:hidden">
                                         {features.map((_, i) => (
-                                            <div key={i} className="w-2 h-2 rounded-full bg-slate-200" />
+                                            <button
+                                                key={i}
+                                                onClick={() => api?.scrollTo(i)}
+                                                className={`transition-all duration-300 rounded-full ${i === currentIndex
+                                                    ? "w-6 h-2 bg-primary"
+                                                    : "w-2 h-2 bg-slate-200"
+                                                    }`}
+                                                aria-label={`Go to slide ${i + 1}`}
+                                            />
                                         ))}
                                     </div>
                                 </Carousel>
