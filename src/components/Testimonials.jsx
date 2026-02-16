@@ -15,48 +15,42 @@ const testimonials = [
     {
         name: "Client Success Story",
         role: "Business Owner",
-        videoId: "dlu9UM3-8TE",
+        videoId: "tTgQ_4g8zeM",
+    },
+    // {
+    //     name: "Client Success Story",
+    //     role: "Business Owner",
+    //     videoId: "CL6pXbetWek",
+    // },
+    {
+        name: "Client Success Story",
+        role: "Business Owner",
+        videoId: "cUlQ_5aPeac",
     },
     {
         name: "Client Success Story",
         role: "Business Owner",
-        videoId: "Nip4Umm1LLY",
+        videoId: "8rYPs_S1GeE",
     },
     {
         name: "Client Success Story",
         role: "Business Owner",
-        videoId: "_QV7Yzw7O34",
-    },
-    // Placeholder items to make it 10
-    {
-        name: "Client Success Story",
-        role: "Business Owner",
-        videoId: "dlu9UM3-8TE",
+        videoId: "puOcgcm9QmA",
     },
     {
         name: "Client Success Story",
         role: "Business Owner",
-        videoId: "Nip4Umm1LLY",
+        videoId: "AcQH2tnj0Hs",
     },
     {
         name: "Client Success Story",
         role: "Business Owner",
-        videoId: "_QV7Yzw7O34",
+        videoId: "dintUCO405Y",
     },
     {
         name: "Client Success Story",
         role: "Business Owner",
-        videoId: "dlu9UM3-8TE",
-    },
-    {
-        name: "Client Success Story",
-        role: "Business Owner",
-        videoId: "Nip4Umm1LLY",
-    },
-    {
-        name: "Client Success Story",
-        role: "Business Owner",
-        videoId: "_QV7Yzw7O34",
+        videoId: "V5SrnIqy8b0",
     },
     {
         name: "Client Success Story",
@@ -100,7 +94,7 @@ const TestimonialCard = ({ testimonial, onPlay, onEnd }) => {
                 {!isPlaying ? (
                     <div className="absolute inset-0 z-20 flex items-end justify-center pb-12">
                         <img
-                            src={`https://img.youtube.com/vi/${testimonial.videoId}/hqdefault.jpg`}
+                            src={`https://img.youtube.com/vi/${testimonial.videoId}/maxresdefault.jpg`}
                             alt={testimonial.name}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
