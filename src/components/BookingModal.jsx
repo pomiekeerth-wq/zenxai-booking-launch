@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, User, Phone, Mail, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,11 @@ const BookingModal = ({ isOpen, onClose }) => {
         email: "",
         company: "",
     });
+    const [nextUrl, setNextUrl] = useState("");
+
+    useEffect(() => {
+        setNextUrl(`${window.location.origin}/dayschedule`);
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -59,7 +64,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                 className="p-8 space-y-6"
                             >
                                 {/* FormSubmit Configuration */}
-                                <input type="hidden" name="_next" value="https://harivikash-b.dayschedule.com/1-on-1-for-booking-system" />
+                                <input type="hidden" name="_next" value={nextUrl} />
                                 <input type="hidden" name="_subject" value="New Consultation Booking Lead" />
                                 <input type="hidden" name="_captcha" value="false" />
 
